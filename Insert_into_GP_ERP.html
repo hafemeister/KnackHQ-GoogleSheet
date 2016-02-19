@@ -1,0 +1,92 @@
+
+<html>
+<header>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+<style type="text/css">
+html, body {
+  width: auto !important;
+}
+</style>
+
+</header>
+<body ng-app="knack">
+    <div class="container" style="margin-left: 10%" ng-controller="MainController as mc" ng-init="getObjectsInfo()">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Knack Insert Script from Google Sheets into connected object</h2>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="google_sheet">URL for google sheet:</label>
+                    <input class="form-control" name="google_sheet" ng-model="sheeturl" />
+                </div>
+                <div class="form-group">
+                    <label for="google_sheet">Number of Columns in the table(including header row):</label>
+                    <input class="form-control" name="google_sheet"  ng-model="no_col" />
+                </div>
+                <div class="form-group">
+                        <label for="col">Give object URL you want to insert into to fetch structure:  </label>
+                        <input class="form-control" name="col" ng-model="insert_into_object" />{{mc.insert_into_object}}
+                </div>
+
+                <button class="btn btn-success" ng-click="getSheet(sheeturl,no_col,insert_into_object)">Extract from sheet</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="object in insert_into_fields_type track by $index">{{object}}</th>
+                        </tr>
+                        <tr>
+                            <th ng-repeat="t in getTimes() track by $index"><input class="form-control" name="col" ng-model="fieldInObj[$index]" /></th>
+                        </tr>
+                        <tr>
+                            <th ng-repeat="header in table_headers">{{header}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rows in table_body">
+                            <td ng-repeat="td in rows">{{td}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-warning" ng-show="transformRuleButton" ng-click="getTransformInfo()">Get Transformation Rules</button>
+                <button class="btn btn-danger" ng-show="transformButton" ng-click="transformRecords()">Transform Records</button>
+
+            </div>
+            <br>
+            <br>
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                       
+                        <tr>
+                            <th ng-repeat="header in table_headers">{{header}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rows in table_body_transformed">
+                            <td ng-repeat="td in rows">{{td}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary" ng-show="InsertKnackButton" ng-click="insertIntoKnack(insert_into_object)">Insert Into Knack</button>
+
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
