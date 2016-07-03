@@ -1,0 +1,27 @@
+{
+  "name": "knackhq",
+  "version": "1.0.0",
+  "description": "A small application to import data into KnackHQ connected objects tables",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/himanshu1691/KnackHQ-GoogleSheet.git"
+  },
+  "keywords": [
+    "knackhq"
+  ],
+  "author": "Himanshu Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/himanshu1691/KnackHQ-GoogleSheet/issues"
+  },
+  "homepage": "https://github.com/himanshu1691/KnackHQ-GoogleSheet#readme"
+}
